@@ -1,8 +1,5 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import BearCharacter from "@/components/characters/BearCharacter";
-import PandaCharacter from "@/components/characters/PandaCharacter";
+import { motion } from "framer-motion";
 import FloatingHearts from "@/components/FloatingHearts";
 import MusicPlayer from "@/components/MusicPlayer";
 import { Button } from "@/components/ui/button";
@@ -10,7 +7,6 @@ import { ArrowRight } from "lucide-react";
 
 const KissDay = () => {
   const navigate = useNavigate();
-  const [kissed, setKissed] = useState(false);
 
   return (
     <div className="min-h-screen bg-valentine-gradient flex flex-col items-center justify-center relative overflow-hidden px-4">
@@ -36,77 +32,19 @@ const KissDay = () => {
           </h1>
         </motion.div>
 
-        {/* Characters kissing */}
-        <motion.div
-          className="flex justify-center items-end mb-8 relative cursor-pointer"
-          onClick={() => setKissed(true)}
-          whileHover={{ scale: 1.02 }}
+        {/* Cute GIF */}
+        <motion.div 
+          className="mb-8"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.4, type: "spring" }}
         >
-          <motion.div
-            animate={{ 
-              x: kissed ? 15 : 0,
-              rotate: kissed ? 5 : 0,
-            }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <BearCharacter className="w-32 h-32 md:w-44 md:h-44" pose="kissing" />
-          </motion.div>
-
-          {/* Kiss effect */}
-          <AnimatePresence>
-            {kissed && (
-              <>
-                <motion.div
-                  className="absolute text-4xl z-10"
-                  style={{ top: "20%", left: "50%", transform: "translateX(-50%)" }}
-                  initial={{ scale: 0, y: 0 }}
-                  animate={{ scale: [0, 1.5, 1], y: -30 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  💋
-                </motion.div>
-                {/* Flying kisses */}
-                {[...Array(8)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute text-2xl"
-                    style={{ top: "30%", left: "50%" }}
-                    initial={{ scale: 0, x: 0, y: 0, opacity: 1 }}
-                    animate={{ 
-                      scale: 1,
-                      x: Math.cos(i * 45 * Math.PI / 180) * 100,
-                      y: Math.sin(i * 45 * Math.PI / 180) * 100 - 50,
-                      opacity: 0,
-                    }}
-                    transition={{ duration: 1.5, delay: i * 0.1 }}
-                  >
-                    💋
-                  </motion.div>
-                ))}
-              </>
-            )}
-          </AnimatePresence>
-
-          <motion.div
-            animate={{ 
-              x: kissed ? -15 : 0,
-              rotate: kissed ? -5 : 0,
-            }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <PandaCharacter className="w-32 h-32 md:w-44 md:h-44" pose="kissing" />
-          </motion.div>
+          <img 
+            src="https://media1.tenor.com/m/ZgEwD09MywgAAAAd/dudu-kissing-bubu-hearts.gif" 
+            alt="Dudu kissing Bubu" 
+            className="w-56 h-56 md:w-72 md:h-72 rounded-2xl shadow-xl mx-auto object-cover"
+          />
         </motion.div>
-
-        {!kissed && (
-          <motion.p 
-            className="text-muted-foreground mb-4 text-sm"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-          >
-            ✨ Tap for a kiss! ✨
-          </motion.p>
-        )}
 
         {/* Message */}
         <motion.div
@@ -118,24 +56,9 @@ const KissDay = () => {
           <p className="text-xl md:text-2xl font-romantic text-foreground mb-4">
             Every kiss from you is like magic... 💋✨
           </p>
-
-          {kissed && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-            >
-              <p className="text-lg text-valentine-red font-romantic italic mb-3">
-                "Your kisses are sweeter than honey!" 🍯💋
-              </p>
-              <motion.div
-                className="flex justify-center gap-2 text-3xl"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-              >
-                💋💕💋
-              </motion.div>
-            </motion.div>
-          )}
+          <p className="text-lg text-valentine-red font-romantic italic">
+            "Your kisses are sweeter than honey!" 🍯💋
+          </p>
         </motion.div>
 
         {/* Navigation */}
