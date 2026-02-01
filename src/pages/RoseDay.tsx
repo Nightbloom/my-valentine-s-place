@@ -36,35 +36,19 @@ const RoseDay = () => {
           </h1>
         </motion.div>
 
-        {/* Characters */}
-        <div className="flex justify-center items-end gap-2 mb-8 relative">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            <BearCharacter className="w-32 h-32 md:w-44 md:h-44" pose="giving" />
-          </motion.div>
-          
-          {/* Rose between them */}
-          <motion.div
-            className="absolute text-4xl md:text-5xl"
-            style={{ bottom: "40%", left: "50%", transform: "translateX(-50%)" }}
-            initial={{ scale: 0, rotate: -45 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ delay: 0.8, type: "spring" }}
-          >
-            🌹
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            <PandaCharacter className="w-32 h-32 md:w-44 md:h-44" pose="receiving" />
-          </motion.div>
-        </div>
+        {/* Cute GIF */}
+        <motion.div 
+          className="mb-8"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.4, type: "spring" }}
+        >
+          <img 
+            src="https://gifdb.com/images/high/bubu-received-flowers-from-dudu-n4gkl2zhjxi7qwnm.gif" 
+            alt="Bubu receiving flowers from Dudu" 
+            className="w-56 h-56 md:w-72 md:h-72 rounded-2xl shadow-xl mx-auto"
+          />
+        </motion.div>
 
         {/* Message */}
         <motion.div
