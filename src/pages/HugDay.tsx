@@ -1,8 +1,5 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import BearCharacter from "@/components/characters/BearCharacter";
-import PandaCharacter from "@/components/characters/PandaCharacter";
 import FloatingHearts from "@/components/FloatingHearts";
 import MusicPlayer from "@/components/MusicPlayer";
 import { Button } from "@/components/ui/button";
@@ -10,7 +7,6 @@ import { ArrowRight } from "lucide-react";
 
 const HugDay = () => {
   const navigate = useNavigate();
-  const [isHugging, setIsHugging] = useState(false);
 
   return (
     <div className="min-h-screen bg-valentine-gradient flex flex-col items-center justify-center relative overflow-hidden px-4">
@@ -36,64 +32,19 @@ const HugDay = () => {
           </h1>
         </motion.div>
 
-        {/* Characters hugging */}
-        <motion.div
-          className="flex justify-center items-end mb-8 relative cursor-pointer"
-          onClick={() => setIsHugging(!isHugging)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        {/* Cute GIF */}
+        <motion.div 
+          className="mb-8"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.4, type: "spring" }}
         >
-          <motion.div
-            animate={{ 
-              x: isHugging ? 20 : 0,
-            }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <BearCharacter className="w-32 h-32 md:w-44 md:h-44" pose="hugging" />
-          </motion.div>
-
-          <motion.div
-            animate={{ 
-              x: isHugging ? -20 : 0,
-            }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <PandaCharacter className="w-32 h-32 md:w-44 md:h-44" pose="hugging" />
-          </motion.div>
-
-          {/* Hug effect */}
-          {isHugging && (
-            <motion.div
-              className="absolute inset-0 flex items-center justify-center"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-            >
-              {[...Array(6)].map((_, i) => (
-                <motion.span
-                  key={i}
-                  className="absolute text-2xl"
-                  initial={{ scale: 0 }}
-                  animate={{ 
-                    scale: [0, 1, 0],
-                    x: Math.cos(i * 60 * Math.PI / 180) * 60,
-                    y: Math.sin(i * 60 * Math.PI / 180) * 60,
-                  }}
-                  transition={{ 
-                    repeat: Infinity, 
-                    duration: 1.5,
-                    delay: i * 0.1
-                  }}
-                >
-                  💕
-                </motion.span>
-              ))}
-            </motion.div>
-          )}
+          <img 
+            src="https://media.tenor.com/ivlixHuP8r0AAAAi/dudu-dudu-bubu.gif" 
+            alt="Bubu and Dudu hugging" 
+            className="w-56 h-56 md:w-72 md:h-72 rounded-2xl mx-auto"
+          />
         </motion.div>
-
-        <p className="text-muted-foreground mb-4 text-sm">
-          ✨ Tap the characters to hug! ✨
-        </p>
 
         {/* Message */}
         <motion.div
@@ -105,24 +56,9 @@ const HugDay = () => {
           <p className="text-xl md:text-2xl font-romantic text-foreground mb-4">
             In your arms is my favorite place to be... 🤗
           </p>
-
-          {isHugging && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <p className="text-lg text-valentine-red font-romantic italic">
-                "A hug from you makes everything better!" 💕
-              </p>
-              <motion.div
-                className="mt-4 text-4xl"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ repeat: Infinity, duration: 1 }}
-              >
-                🤗💕🤗
-              </motion.div>
-            </motion.div>
-          )}
+          <p className="text-lg text-valentine-red font-romantic italic">
+            "A hug from you makes everything better!" 💕
+          </p>
         </motion.div>
 
         {/* Navigation */}
