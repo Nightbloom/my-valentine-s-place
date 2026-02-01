@@ -59,36 +59,19 @@ const ProposeDay = () => {
           </h1>
         </motion.div>
 
-        {/* Characters - Bear proposing */}
-        <div className="flex justify-center items-end gap-4 mb-8 relative">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="relative"
-          >
-            {/* Bear on one knee effect */}
-            <div className="transform translate-y-4">
-              <BearCharacter className="w-32 h-32 md:w-44 md:h-44" pose="proposing" />
-            </div>
-            {/* Ring box */}
-            <motion.div
-              className="absolute -right-2 bottom-12 text-2xl"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
-            >
-              💍
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            <PandaCharacter className="w-32 h-32 md:w-44 md:h-44" pose="blushing" />
-          </motion.div>
-        </div>
+        {/* Cute GIF */}
+        <motion.div 
+          className="mb-8"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.4, type: "spring" }}
+        >
+          <img 
+            src="https://media1.tenor.com/m/0JWcKoeZ3kkAAAAC/bubu-bubu-dudu.gif" 
+            alt="Bubu proposing to Dudu" 
+            className="w-56 h-56 md:w-72 md:h-72 rounded-2xl shadow-xl mx-auto"
+          />
+        </motion.div>
 
         {/* Message */}
         <motion.div
