@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import BearCharacter from "@/components/characters/BearCharacter";
-import PandaCharacter from "@/components/characters/PandaCharacter";
+import { motion } from "framer-motion";
 import FloatingHearts from "@/components/FloatingHearts";
 import MusicPlayer from "@/components/MusicPlayer";
 import Confetti from "@/components/Confetti";
 
 const ValentinesDay = () => {
-  const [showFinalMessage, setShowFinalMessage] = useState(false);
   const [confettiActive, setConfettiActive] = useState(true);
 
   useEffect(() => {
@@ -77,37 +74,18 @@ const ValentinesDay = () => {
           </h1>
         </motion.div>
 
-        {/* Characters together */}
-        <motion.div
-          className="flex justify-center items-end gap-0 mb-8 relative"
-          initial={{ scale: 0.8, opacity: 0 }}
+        {/* Cute GIF */}
+        <motion.div 
+          className="mb-8"
+          initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.4, type: "spring" }}
         >
-          <motion.div
-            animate={{ x: 10 }}
-          >
-            <BearCharacter className="w-36 h-36 md:w-48 md:h-48" pose="hugging" />
-          </motion.div>
-
-          {/* Heart between them */}
-          <motion.div
-            className="absolute text-5xl z-10"
-            style={{ top: "15%", left: "50%", transform: "translateX(-50%)" }}
-            animate={{ 
-              scale: [1, 1.3, 1],
-              y: [0, -10, 0]
-            }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-          >
-            💕
-          </motion.div>
-
-          <motion.div
-            animate={{ x: -10 }}
-          >
-            <PandaCharacter className="w-36 h-36 md:w-48 md:h-48" pose="hugging" />
-          </motion.div>
+          <img 
+            src="https://media.tenor.com/ejMtbLv7H-gAAAAM/panda-bear-brown-bear.gif" 
+            alt="Bubu and Dudu together" 
+            className="w-64 h-64 md:w-80 md:h-80 rounded-2xl shadow-xl mx-auto object-cover"
+          />
         </motion.div>
 
         {/* Message Box */}
@@ -117,77 +95,31 @@ const ValentinesDay = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <p className="text-xl md:text-2xl font-romantic text-foreground mb-6">
+          <p className="text-xl md:text-2xl font-romantic text-foreground mb-4">
             From Rose Day to Valentine's Day, every moment with you is magical...
           </p>
-
-          {/* Final reveal button */}
-          <motion.button
-            onClick={() => setShowFinalMessage(true)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <motion.div
+            className="flex justify-center gap-3 text-4xl"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
           >
-            {!showFinalMessage ? (
-              <motion.div
-                className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-romantic text-xl inline-block"
-                animate={{ 
-                  boxShadow: [
-                    "0 0 20px hsl(var(--valentine-red) / 0.3)",
-                    "0 0 40px hsl(var(--valentine-red) / 0.6)",
-                    "0 0 20px hsl(var(--valentine-red) / 0.3)"
-                  ]
-                }}
-                transition={{ repeat: Infinity, duration: 2 }}
-              >
-                💝 Open My Heart 💝
-              </motion.div>
-            ) : (
-              <AnimatePresence>
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="text-center"
-                >
-                  <motion.h2
-                    className="text-4xl md:text-6xl font-romantic text-valentine-red mb-4"
-                    animate={{ 
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                  >
-                    I Like You! 💕
-                  </motion.h2>
-                  <p className="text-xl text-foreground font-romantic mb-4">
-                    You make my heart skip a beat every single day
-                  </p>
-                  <motion.div
-                    className="flex justify-center gap-3 text-4xl"
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
-                  >
-                    🐻❤️🐼
-                  </motion.div>
-                  <p className="text-lg text-muted-foreground mt-4 font-romantic italic">
-                    - Your Bear 🐻
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-            )}
-          </motion.button>
+            🐻❤️🐼
+          </motion.div>
+          <p className="text-lg text-muted-foreground mt-4 font-romantic italic">
+            - Your Bear 🐻
+          </p>
         </motion.div>
 
         {/* Celebration trigger */}
-        {showFinalMessage && (
-          <motion.button
-            onClick={() => setConfettiActive(true)}
-            className="text-valentine-red underline font-medium"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            🎉 Tap for more celebration! 🎉
-          </motion.button>
-        )}
+        <motion.button
+          onClick={() => setConfettiActive(true)}
+          className="text-valentine-red underline font-medium"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+        >
+          🎉 Tap for more celebration! 🎉
+        </motion.button>
       </motion.div>
 
       {/* Corner decorations */}
