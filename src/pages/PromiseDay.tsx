@@ -6,7 +6,7 @@ import PandaCharacter from "@/components/characters/PandaCharacter";
 import FloatingHearts from "@/components/FloatingHearts";
 import MusicPlayer from "@/components/MusicPlayer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 
 const promises = [
   "I promise to always make you smile 😊",
@@ -136,10 +136,18 @@ const PromiseDay = () => {
 
         {/* Navigation */}
         <motion.div
+          className="flex gap-4 flex-wrap justify-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
         >
+          <Button
+            variant="outline"
+            onClick={() => navigate("/teddy-day")}
+            className="text-lg px-6 py-6 rounded-full"
+          >
+            <ArrowLeft className="mr-2 h-5 w-5" /> Go Back
+          </Button>
           <Button
             onClick={() => navigate("/hug-day")}
             className="text-lg px-8 py-6 rounded-full"
