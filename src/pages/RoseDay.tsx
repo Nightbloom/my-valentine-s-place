@@ -69,7 +69,7 @@ const RoseDay = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              ✨ Click to reveal a secret ✨
+              ✨ Click here ✨
             </motion.button>
           ) : (
             <motion.p
