@@ -1,45 +1,37 @@
 import { useState, useRef, useEffect } from "react";
-import { Volume2, VolumeX, Music } from "lucide-react";
+import { Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import backgroundMusic from "@/assets/background-music.mp3";
 
-interface MusicPlayerProps {
-  autoPlay?: boolean;
-}
-
-const MusicPlayer = ({ autoPlay = false }: MusicPlayerProps) => {
+const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasAudio, setHasAudio] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    if (autoPlay && hasAudio && audioRef.current) {
-      audioRef.current.play().catch(() => {
-        // Autoplay was prevented
-      });
-      setIsPlaying(true);
+    if (audioRef.current) {
+      audioRef.current.src = backgroundMusic;
+      audioRef.current.loop = true;
     }
-  }, [autoPlay, hasAudio]);
+  }, []);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      if (audioRef.current) {
-        audioRef.current.src = url;
-        setHasAudio(true);
-        audioRef.current.play().catch(() => {});
+  // Auto-play after first user interaction anywhere on the page
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (!hasInteracted && audioRef.current) {
+        setHasInteracted(true);
+        audioRef.current.play().catch(() => {
+          // Autoplay was prevented
+        });
         setIsPlaying(true);
       }
-    }
-  };
+    };
+
+    document.addEventListener("click", handleFirstInteraction, { once: true });
+    return () => document.removeEventListener("click", handleFirstInteraction);
+  }, [hasInteracted]);
 
   const togglePlay = () => {
-    if (!hasAudio) {
-      fileInputRef.current?.click();
-      return;
-    }
-
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
@@ -53,21 +45,12 @@ const MusicPlayer = ({ autoPlay = false }: MusicPlayerProps) => {
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <audio ref={audioRef} loop />
-      <input
-        type="file"
-        ref={fileInputRef}
-        accept="audio/*"
-        onChange={handleFileUpload}
-        className="hidden"
-      />
       <Button
         onClick={togglePlay}
         size="icon"
         className="rounded-full w-12 h-12 bg-primary/90 hover:bg-primary shadow-lg"
       >
-        {!hasAudio ? (
-          <Music className="h-5 w-5" />
-        ) : isPlaying ? (
+        {isPlaying ? (
           <Volume2 className="h-5 w-5" />
         ) : (
           <VolumeX className="h-5 w-5" />
