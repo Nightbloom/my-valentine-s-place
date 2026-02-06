@@ -5,6 +5,7 @@ import BearCharacter from "@/components/characters/BearCharacter";
 import PandaCharacter from "@/components/characters/PandaCharacter";
 import FloatingHearts from "@/components/FloatingHearts";
 import Confetti from "@/components/Confetti";
+import MusicPlayer from "@/components/MusicPlayer";
 import { Button } from "@/components/ui/button";
 
 const ProposalPage = () => {
@@ -47,6 +48,7 @@ const ProposalPage = () => {
     <div className="min-h-screen bg-valentine-gradient flex flex-col items-center justify-center relative overflow-hidden">
       <FloatingHearts count={20} />
       <Confetti isActive={showCelebration} />
+      <MusicPlayer />
 
       <AnimatePresence>
         {showCelebration && (

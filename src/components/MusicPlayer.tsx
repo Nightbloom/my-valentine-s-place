@@ -4,32 +4,20 @@ import { Button } from "@/components/ui/button";
 import backgroundMusic from "@/assets/background-music.mp3";
 
 const MusicPlayer = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.src = backgroundMusic;
       audioRef.current.loop = true;
+      // Try to auto-play immediately
+      audioRef.current.play().catch(() => {
+        // Browser blocked autoplay, we'll set state to reflect this
+        setIsPlaying(false);
+      });
     }
   }, []);
-
-  // Auto-play after first user interaction anywhere on the page
-  useEffect(() => {
-    const handleFirstInteraction = () => {
-      if (!hasInteracted && audioRef.current) {
-        setHasInteracted(true);
-        audioRef.current.play().catch(() => {
-          // Autoplay was prevented
-        });
-        setIsPlaying(true);
-      }
-    };
-
-    document.addEventListener("click", handleFirstInteraction, { once: true });
-    return () => document.removeEventListener("click", handleFirstInteraction);
-  }, [hasInteracted]);
 
   const togglePlay = () => {
     if (audioRef.current) {
