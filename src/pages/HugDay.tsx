@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import FloatingHearts from "@/components/FloatingHearts";
-import MusicPlayer from "@/components/MusicPlayer";
 import HomeButton from "@/components/HomeButton";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -12,7 +11,6 @@ const HugDay = () => {
   return (
     <div className="min-h-screen bg-valentine-gradient flex flex-col items-center justify-center relative overflow-hidden px-4">
       <FloatingHearts count={12} />
-      <MusicPlayer />
       <HomeButton />
 
       <motion.div

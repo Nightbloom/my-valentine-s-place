@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import FloatingHearts from "@/components/FloatingHearts";
-import MusicPlayer from "@/components/MusicPlayer";
 import HomeButton from "@/components/HomeButton";
 import Confetti from "@/components/Confetti";
 
@@ -19,7 +18,6 @@ const ValentinesDay = () => {
   return (
     <div className="min-h-screen bg-valentine-gradient flex flex-col items-center justify-center relative overflow-hidden px-4 py-8">
       <FloatingHearts count={25} />
-      <MusicPlayer />
       <HomeButton />
       <Confetti isActive={confettiActive} />
 
