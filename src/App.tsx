@@ -13,6 +13,7 @@ import HugDay from "./pages/HugDay";
 import KissDay from "./pages/KissDay";
 import ValentinesDay from "./pages/ValentinesDay";
 import NotFound from "./pages/NotFound";
+import MusicPlayer from "./components/MusicPlayer";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <MusicPlayer />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ProposalPage />} />
